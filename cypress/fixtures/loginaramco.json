@@ -1,0 +1,10 @@
+{
+  "method": "POST",
+  "request": "/v2/users/checkAramcoUser",
+  "user_identifier": "test4@aramco.com",
+  "udid": "23223",
+  "client": "i",
+  "tenant": "walaplus",
+  "language": "en",
+  "password": "2T+3oX5zp1TbEkEtwWq52g=="
+}
