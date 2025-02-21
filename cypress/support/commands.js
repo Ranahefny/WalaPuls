@@ -28,16 +28,23 @@
 // Generate Timestamp and Secret Key
 import CryptoJS from 'crypto-js';
 
-Cypress.Commands.add("generateSecretKey", (method, request, client, user_identifier, password) => {
-    const timestamp = Math.floor(Date.now() / 1000); 
-    const secret_key = 'f25522a5b819378b079ae015f0b4141de15baf33a366abfa015b5237ccaff71f';  // Replace with actual key
+Cypress.Commands.add("generateSecretKey", () => {
+     timestamp = Math.floor(Date.now() / 1000);
+       // Define request parameters
+       let params = {
+         method: 'POST',
+         request: '/v2/users/login',
+         user_identifier: 'user@walf.com',
+         client: 'i',
+         timestamp: timestamp,
+         password: '2T+3oX5zp1TbEkEtwWq52g==',
+       };
+   //+${params.password}
+       // Generate Secret Key (Signature)
+       const secret_key = 'f25522a5b819378b079ae015f0b4141de15baf33a366abfa015b5237ccaff71f';  // Replace with actual key
+       const signature = `${params.method}+${params.request}+${params.timestamp}+${params.client}+${params.user_identifier}+${params.password}`;
+       secret = CryptoJS.HmacSHA256(signature, secret_key).toString();
+       cy.log(`signature: ${signature}`);
+    });
 
-    // Correct Signature Format
-    const signatureString = `${method}+${request}+${timestamp}+${client}+${user_identifier}+${password}`;
-    
-    // Generate HMAC-SHA256 hash
-    const secret = CryptoJS.HmacSHA256(signatureString, secret_key).toString(CryptoJS.enc.Hex);
-    
-    return { timestamp, secret };
-});
 

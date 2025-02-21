@@ -1,15 +1,9 @@
 import CryptoJS from 'crypto-js';
-
-describe('Aramco API Tests', () => {
-  let data;
+describe('Login API with Timestamp and Secret Key', () => {
   let timestamp;
   let secret;
   before(() => {
-    cy.fixture('loginNorma.json').then((Logindata) => {
-      data = Logindata; // Store fixture data in a variable
-    cy.log('data ::: ', data.user_identifier);
-  });
-    //Generate Timestamp
+    // Generate Timestamp
     timestamp = Math.floor(Date.now() / 1000);
     // Define request parameters
     let params = {
@@ -25,27 +19,29 @@ describe('Aramco API Tests', () => {
     const secret_key = 'f25522a5b819378b079ae015f0b4141de15baf33a366abfa015b5237ccaff71f';  // Replace with actual key
     const signature = `${params.method}+${params.request}+${params.timestamp}+${params.client}+${params.user_identifier}+${params.password}`;
     secret = CryptoJS.HmacSHA256(signature, secret_key).toString();
-    cy.log(`signature: ${signature}`);
+    console.log(`signature: ${signature}`);
   });
-
   it('Login with Secure Authentication', () => {
     cy.request({
-      method: "POST",
-      url: data.request,
+      method: 'POST',
+      url: 'https://users-dt.walaplus.com/v2/users/login',
       body: {
-          timestamp: timestamp,
-          secret: secret,
-          user_identifier: data.user_identifier,
-          password: data.password,
-          udid: data.udid,
-          client: data.client,
-          tenant: data.tenant,
-          language: data.language
-      },
-      failOnStatusCode: false  // ✅ Prevent test from failing immediately
-  }).then((response) => {
-      cy.log(`Response: ${JSON.stringify(response.body)}`);  // ✅ Debugging
-    });
+        timestamp: timestamp,  // Use dynamic timestamp
+        secret: secret,        // Use generated secret key
+        user_identifier: 'user@walf.com',
+       password: '2T+3oX5zp1TbEkEtwWq52g==',
+        udid: '23223',
+        client: 'i',
+        tenant: 'walaplus',
+        language: 'en'
+      }
+    })
+      .then((response) => {
+        expect(response.status).to.eq(202); // Ensure successful login
+        // console.log('Response Body :', response.body);
+        // cy.log('Response Body :', response.body);
+        expect(response.body).to.have.property('user_id');
+      
+      });
   });
 });
-

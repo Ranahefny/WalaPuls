@@ -1,0 +1,12 @@
+{
+    "method": "POST",
+    "url":"/v2/users/login",
+    "request": "https://users-dt.walaplus.com/v2/users/login",
+    "user_identifier": "user@walf.com",
+    "password": "2T+3oX5zp1TbEkEtwWq52g==",
+    "udid": "a1a1a12345678",
+    "client": "i",
+    "tenant": "walaplus",
+    "language": "en",
+    "secret_key":"f25522a5b819378b079ae015f0b4141de15baf33a366abfa015b5237ccaff71f"
+  }
