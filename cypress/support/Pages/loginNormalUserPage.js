@@ -1,3 +1,5 @@
+
+import CryptoJS from 'crypto-js';
 class loginNormalUserPage {
 
     constructor() {
@@ -10,11 +12,16 @@ class loginNormalUserPage {
 
     }
     loadTestData() {
-        return cy.fixture('loginNorma.json').then((testData) => {
-            this.data = testData; // Store loaded fixture data
+        return cy.fixture('loginNorma').then((testdata) => {
+            this.data = testdata;  // Assign fixture data
         });
     }
-    genratesekretKey() {
+    generateSecretKey() {
+        cy.log("Generating secret key with test data:", this.data);
+        if (!this.data) {
+            throw new Error("Test data is not loaded. Call loadTestData() first.");
+        }
+        cy.log("Generating secret key with test data:", this.data);
         let params = {
             method: this.data.method,
             request: this.data.url,
@@ -29,8 +36,11 @@ class loginNormalUserPage {
         this.secret = CryptoJS.HmacSHA256(signature, secret_key).toString();
         console.log(`signature: ${signature}`);
     }
-
     loginUser() {
+        if (!this.data) {
+            throw new Error("Test data is not loaded. Call loadTestData() first.");
+        }
+        else("your Test Data is loaded sussfully");
         cy.request({
             method: this.data.method,
             url: this.data.request,
