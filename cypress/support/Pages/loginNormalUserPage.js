@@ -1,46 +1,21 @@
 
-import CryptoJS from 'crypto-js';
-class loginNormalUserPage {
+import authPage from '../Pages/authPage';
+
+class loginNormalUserPage extends authPage {
 
     constructor() {
-        this.timestamp = null;
+        super();
+        this.timestamp = Math.floor(Date.now() / 1000);
         this.secret = null;
         this.data = null;
-        // Generate Timestamp
-        this.timestamp = Math.floor(Date.now() / 1000);
-        // Define request parameters
 
-    }
-    loadTestData() {
-        return cy.fixture('loginNorma').then((testdata) => {
-            this.data = testdata;  // Assign fixture data
-        });
-    }
-    generateSecretKey() {
-        cy.log("Generating secret key with test data:", this.data);
-        if (!this.data) {
-            throw new Error("Test data is not loaded. Call loadTestData() first.");
-        }
-        cy.log("Generating secret key with test data:", this.data);
-        let params = {
-            method: this.data.method,
-            request: this.data.url,
-            user_identifier: this.data.user_identifier,
-            client: this.data.client,
-            timestamp: this.timestamp,
-            password: this.data.password,
-        };
-        // Generate Secret Key (Signature)
-        const secret_key = this.data.secret_key;  // Replace with actual key
-        const signature = `${params.method}+${params.request}+${params.timestamp}+${params.client}+${params.user_identifier}+${params.password}`;
-        this.secret = CryptoJS.HmacSHA256(signature, secret_key).toString();
-        console.log(`signature: ${signature}`);
+
     }
     loginUser() {
         if (!this.data) {
             throw new Error("Test data is not loaded. Call loadTestData() first.");
         }
-        else("your Test Data is loaded sussfully");
+        else ("your Test Data is loaded sussfully");
         cy.request({
             method: this.data.method,
             url: this.data.request,

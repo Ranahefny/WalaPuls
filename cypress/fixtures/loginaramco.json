@@ -1,10 +1,13 @@
 {
   "method": "POST",
-  "request": "/v2/users/checkAramcoUser",
+  "request":"https://users-dt.walaplus.com/v2/users/checkAramcoUser",
+  "url": "/v2/users/checkAramcoUser",
   "user_identifier": "test4@aramco.com",
   "udid": "23223",
   "client": "i",
   "tenant": "walaplus",
   "language": "en",
-  "password": "2T+3oX5zp1TbEkEtwWq52g=="
+  "password": "2T+3oX5zp1TbEkEtwWq52g==",
+  "secret_key":"f25522a5b819378b079ae015f0b4141de15baf33a366abfa015b5237ccaff71f"
+
 }
