@@ -51,3 +51,9 @@ Cypress.Commands.add("generateSecretKey", () => {
     });
 
 
+
+    Cypress.Commands.add("queryDB", (query) => {
+      return cy.task("queryDb", query);
+    });
+    
+    

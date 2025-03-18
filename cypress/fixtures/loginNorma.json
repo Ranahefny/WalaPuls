@@ -1,7 +1,7 @@
 {
     "method": "POST",
     "url":"/v2/users/login",
-    "request": "https://users-dt.walaplus.com/v2/users/login",
+    "request": "https://walaoffer.free.beeceptor.com/v2/users/login",
     "user_identifier": "user@walf.com",
     "password": "2T+3oX5zp1TbEkEtwWq52g==",
     "udid": "a1a1a12345678",
