@@ -26,7 +26,6 @@ module.exports = {
               host: "34.250.140.82", // SSH Server
               port: 22,
               username: "wp-test",
-              //privateKey: fs.readFileSync("C:/Users/rana/.ssh/id_rsa"), 
               dstHost: "walaplus-dev-test.cbpxotj1mzx2.eu-west-1.rds.amazonaws.com", // MySQL Host
               dstPort: 3306,
               localHost: "127.0.0.1",
