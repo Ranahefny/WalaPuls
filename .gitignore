@@ -3,3 +3,5 @@
 id_rsa
 id_rsa.pub
 node_modules/ssh2/test/fixtures/id_rsa
+cypress.config.js
+wala.pem 
