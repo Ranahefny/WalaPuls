@@ -30,6 +30,7 @@ module.exports = {
               dstPort: 3306,
               localHost: "127.0.0.1",
               localPort: 3307,
+              privateKey: fs.readFileSync("C:/Users/andre/.ssh/id_rsa"), // Path to your private key
             };
 
             tunnel(sshConfig, function (err, server) {
@@ -44,6 +45,7 @@ module.exports = {
                 user: "walaplus_test_user",
                 password: "Yxsbnhl:cEqK(f8Nr{Q-@>AGM",
                 database: "walaplus_test",
+              
               });
 
               connection.query(query, (error, results) => {
